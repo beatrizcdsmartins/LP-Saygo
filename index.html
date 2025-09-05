@@ -189,4 +189,16 @@
     });
   </script>
 </body>
+
+<script>
+  const form = document.querySelector("form");
+
+  form.addEventListener("submit", function(event) {
+    // Permite o envio normal para o Make
+    // Adiciona um pequeno delay antes de redirecionar
+    setTimeout(() => {
+      window.location.href = "./obrigado.html"; // substitua pela URL da sua página de obrigado
+    }, 200); // 200ms é suficiente para o envio do formulário
+  });
+</script>
 </html>
