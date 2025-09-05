@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário Simulação</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #0c1b3d;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px 40px;
+      border-radius: 12px;
+      width: 380px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      color: #fff;
+    }
+
+    .form-container h2 {
+      margin-bottom: 20px;
+      font-size: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      font-size: 14px;
+    }
+
+    .form-button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #F57A32;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .form-button:hover {
+      background: #e06720;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Preencha em poucos cliques!</h2>
+    <form action="https://hook.us1.make.com/mvs1iqc999dclyx3xsp3hesw3hbgtpj7" method="POST">
+      <div class="form-group">
+        <label for="nome">Nome *</label>
+        <input type="text" id="nome" name="nome" required>
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail *</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="telefone">Telefone *</label>
+        <input type="tel" id="telefone" name="telefone" required>
+      </div>
+      <div class="form-group">
+        <label for="volume">Volume médio de operação cambial *</label>
+        <input type="text" id="volume" name="volume" required>
+      </div>
+      <div class="form-group">
+        <label for="cambio">Já fecha câmbio hoje com *</label>
+        <input type="text" id="cambio" name="cambio" required>
+      </div>
+
+      <!-- Campos ocultos para UTMs e tracking -->
+      <input type="hidden" id="utm_source" name="utm_source">
+      <input type="hidden" id="utm_medium" name="utm_medium">
+      <input type="hidden" id="utm_content" name="utm_content">
+      <input type="hidden" id="utm_campaign" name="utm_campaign">
+      <input type="hidden" id="utm_term" name="utm_term">
+      <input type="hidden" id="pagina_captura" name="pagina_captura">
+      <input type="hidden" id="gclid" name="gclid">
+      <input type="hidden" id="client_id" name="client_id">
+
+      <button type="submit" class="form-button">Quero minha simulação agora</button>
+    </form>
+  </div>
+
+  <script>
+    function getURLParameterValue(paramName) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(paramName) || '';
+    }
+
+    function getPageSlugValue() {
+      const pathParts = window.location.pathname.split("/").filter(Boolean);
+      return pathParts.length ? pathParts[pathParts.length - 1] : "home";
+    }
+
+    function getReferrerSourceValue() {
+      if (document.referrer) {
+        try {
+          return new URL(document.referrer).hostname;
+        } catch (e) {
+          return "direto";
+        }
+      }
+      return "direto";
+    }
+
+    function getClientId() {
+      const gaCookie = document.cookie.split('; ').find(row => row.startsWith('_ga='));
+      if (gaCookie) {
+        const parts = gaCookie.split('=');
+        if (parts.length > 1) {
+          const values = parts[1].split('.');
+          if (values.length >= 4) {
+            return values[2] + "." + values[3];
+          }
+        }
+      }
+      return '';
+    }
+
+    function salvarNoLocalStorage(chave, valor) {
+      if (valor) localStorage.setItem(chave, valor);
+    }
+
+    function buscarNoLocalStorage(chave) {
+      return localStorage.getItem(chave) || '';
+    }
+
+    function setFieldValue(fieldId, value) {
+      const field = document.getElementById(fieldId);
+      if (field && value) {
+        field.value = value;
+      }
+    }
+
+    function preencherCamposFormularioUTM() {
+      let utmSourceValue = getURLParameterValue("utm_source") || buscarNoLocalStorage("utm_source");
+      if (!utmSourceValue) {
+        utmSourceValue = getReferrerSourceValue();
+      }
+      salvarNoLocalStorage("utm_source", utmSourceValue);
+      setFieldValue("utm_source", utmSourceValue);
+
+      ["utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid"].forEach(param => {
+        let value = getURLParameterValue(param) || buscarNoLocalStorage(param);
+        salvarNoLocalStorage(param, value);
+        setFieldValue(param, value);
+      });
+
+      const slugValue = getPageSlugValue();
+      salvarNoLocalStorage("pagina_captura", slugValue);
+      setFieldValue("pagina_captura", slugValue);
+
+      let clientIdValue = getClientId() || buscarNoLocalStorage("client_id");
+      salvarNoLocalStorage("client_id", clientIdValue);
+      setFieldValue("client_id", clientIdValue);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(preencherCamposFormularioUTM, 500);
+    });
+  </script>
+</body>
+</html>
