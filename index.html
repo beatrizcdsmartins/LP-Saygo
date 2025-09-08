@@ -301,6 +301,25 @@ const formOriginal = document.querySelector(".form-container form");
 
 let openedByWhatsApp = false; // flag global
 
+// // ----- FUNÇÃO DE SUBMIT (REUTILIZÁVEL) -----
+// function handleFormSubmit(formEl) {
+//   formEl.addEventListener("submit", function (event) {
+//     event.preventDefault();
+//     event.target.submit(); // envia pro Make normalmente
+
+//     setTimeout(() => {
+//       if (openedByWhatsApp) {
+//         // Redireciona para WhatsApp
+//         window.location.href =
+//           "https://wa.me/5511971678343?text=Ol%C3%A1,%20vim%20do%20an%C3%BAncio%20e%20quero%20conhecer%20a%20Saygo%20Corretora";
+//       } else {
+//         // Redireciona para obrigado.html
+//         window.location.href = "./obrigado.html";
+//       }
+//     }, 200);
+//   });
+// }
+
 // ----- FUNÇÃO DE SUBMIT (REUTILIZÁVEL) -----
 function handleFormSubmit(formEl) {
   formEl.addEventListener("submit", function (event) {
@@ -308,14 +327,8 @@ function handleFormSubmit(formEl) {
     event.target.submit(); // envia pro Make normalmente
 
     setTimeout(() => {
-      if (openedByWhatsApp) {
-        // Redireciona para WhatsApp
-        window.location.href =
-          "https://wa.me/5511971678343?text=Ol%C3%A1,%20vim%20do%20an%C3%BAncio%20e%20quero%20conhecer%20a%20Saygo%20Corretora";
-      } else {
-        // Redireciona para obrigado.html
-        window.location.href = "./obrigado.html";
-      }
+      // Redireciona sempre para obrigado.html
+      window.location.href = "./obrigado.html";
     }, 200);
   });
 }
