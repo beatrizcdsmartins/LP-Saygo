@@ -19,7 +19,12 @@
 <body>
   <div class="wrapper">
 
-    
+<div id="modalForm" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div id="modalFormContent"></div>
+  </div>
+</div>
   <header>
     <a href="#section1"><img src="./assets/logoSaygo.webp" alt="logo Saygo"></a>
     <a href="#form" class="ctaBtn">Vamos conversar?</a>
@@ -32,7 +37,7 @@
       com <span>taxas competitivas</span> , sem tarifas ocultas e com <br>
       suporte especializado. </p>
 
-    <a data-aos="fade-right" data-aos-delay="250" href="#form" class="ctaBtn">Quero simular minha taxa agora!</a>
+    <a data-aos="fade-right" data-aos-delay="250" href="#form" class="ctaBtn openModal">Quero simular minha taxa agora!</a>
     </div>
  
   </section>
@@ -161,7 +166,7 @@
     <p>© 2025 - Todos os direitos reservados - Saygo Group</p>
   </footer>
 
-  <a href="#"><img src="./assets/Btn Whatsapp.svg" alt="whatsapp" class="btnwhatsapp"></a>
+  <a href="#"><img src="./assets/Btn Whatsapp.svg" alt="whatsapp" class="btnwhatsapp openModal"></a>
     
   </div>
 
@@ -252,6 +257,8 @@
       setTimeout(preencherCamposFormularioUTM, 500);
     });
   </script>
+
+
 </body>
 
 <script>
@@ -264,6 +271,41 @@
       window.location.href = "./obrigado.html"; // substitua pela URL da sua página de obrigado
     }, 200); // 200ms é suficiente para o envio do formulário
   });
+
+
+
+
+
+  //modal
+
+ const modal = document.getElementById("modalForm");
+  const modalContent = document.getElementById("modalFormContent");
+  const openBtns = document.querySelectorAll(".openModal"); // todos os botões que abrem modal
+  const closeBtn = document.querySelector(".close");
+  const formOriginal = document.querySelector(".form-container form");
+
+  openBtns.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      // Clona o formulário original
+      const formClone = formOriginal.cloneNode(true);
+      modalContent.innerHTML = ""; 
+      modalContent.appendChild(formClone);
+      modal.style.display = "flex"; // mostra o modal
+    });
+  });
+
+  // Fechar no X
+  closeBtn.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // Fechar clicando fora do modal
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  }
 </script>
 
 

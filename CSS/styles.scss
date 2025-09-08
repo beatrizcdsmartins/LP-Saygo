@@ -18,6 +18,51 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Fundo escuro */
+.modal {
+  display: none; /* modal escondido por padrão */
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+/* Conteúdo centralizado */
+.modal-content {
+  background: var(--primary);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  padding: 25px;
+  box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
+  position: relative;
+  animation: fadeInScale 0.3s ease-in-out;
+
+  label{
+    color: white;
+  }
+}
+
+/* Botão de fechar */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+/* Animação de entrada */
+@keyframes fadeInScale {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+
 .wrapper {
     width: 100%;
 }
