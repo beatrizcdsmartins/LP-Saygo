@@ -294,68 +294,76 @@
 <script>
 
   const modal = document.getElementById("modalForm");
-  const modalContent = document.getElementById("modalFormContent");
-  const openBtns = document.querySelectorAll(".openModal"); // todos os botões que abrem modal
-  const closeBtn = document.querySelector(".close");
-  const formOriginal = document.querySelector(".form-container form");
+const modalContent = document.getElementById("modalFormContent");
+const openBtns = document.querySelectorAll(".openModal"); // todos os botões que abrem modal
+const closeBtn = document.querySelector(".close");
+const formOriginal = document.querySelector(".form-container form");
 
-  let openedByWhatsApp = false; // flag global
+let openedByWhatsApp = false; // flag global
 
-  // ----- FUNÇÃO DE SUBMIT (REUTILIZÁVEL) -----
-  function handleFormSubmit(formEl) {
-    formEl.addEventListener("submit", function (event) {
-      event.preventDefault();
-      event.target.submit(); // envia pro Make normalmente
+// ----- FUNÇÃO DE SUBMIT (REUTILIZÁVEL) -----
+function handleFormSubmit(formEl) {
+  formEl.addEventListener("submit", function (event) {
+    event.preventDefault();
+    event.target.submit(); // envia pro Make normalmente
 
-      setTimeout(() => {
-        if (openedByWhatsApp) {
-          // Redireciona para WhatsApp
-          window.location.href =
-            "https://wa.me/5511971678343?text=Ol%C3%A1,%20vim%20do%20an%C3%BAncio%20e%20quero%20conhecer%20a%20Saygo%20Corretora";
-        } else {
-          // Redireciona para obrigado.html
-          window.location.href = "./obrigado.html";
-        }
-      }, 200);
-    });
-  }
-
-  // Escuta o formulário ORIGINAL (fora do modal)
-  handleFormSubmit(formOriginal);
-
-  // ----- ABRIR MODAL -----
-  openBtns.forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault(); // impede o <a href="#"> de rolar a página
-
-      // Marca se foi o botão do WhatsApp que abriu
-      openedByWhatsApp = btn.classList.contains("btnwhatsapp");
-
-      // Clona o formulário original
-      const formClone = formOriginal.cloneNode(true);
-
-      // Aplica listener no form clonado também
-      handleFormSubmit(formClone);
-
-      // Insere no modal
-      modalContent.innerHTML = "";
-      modalContent.appendChild(formClone);
-      modal.style.display = "flex"; // mostra o modal
-    });
+    setTimeout(() => {
+      if (openedByWhatsApp) {
+        // Redireciona para WhatsApp
+        window.location.href =
+          "https://wa.me/5511971678343?text=Ol%C3%A1,%20vim%20do%20an%C3%BAncio%20e%20quero%20conhecer%20a%20Saygo%20Corretora";
+      } else {
+        // Redireciona para obrigado.html
+        window.location.href = "./obrigado.html";
+      }
+    }, 200);
   });
+}
 
-  // ----- FECHAR MODAL -----
-  if (closeBtn) {
-    closeBtn.onclick = function () {
-      modal.style.display = "none";
-    };
-  }
+// Escuta o formulário ORIGINAL (fora do modal)
+handleFormSubmit(formOriginal);
 
-  window.onclick = function (event) {
-    if (event.target === modal) {
-      modal.style.display = "none";
-    }
+// ----- ABRIR MODAL -----
+openBtns.forEach(btn => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault(); // impede o <a href="#"> de rolar a página
+
+    // Marca se foi o botão do WhatsApp que abriu
+    openedByWhatsApp = btn.classList.contains("btnwhatsapp");
+
+    // Clona o formulário original
+    const formClone = formOriginal.cloneNode(true);
+
+    // Copia os valores já preenchidos do original para o clone
+    const originalInputs = formOriginal.querySelectorAll("input, select, textarea");
+    const cloneInputs = formClone.querySelectorAll("input, select, textarea");
+
+    originalInputs.forEach((input, index) => {
+      cloneInputs[index].value = input.value;
+    });
+
+    // Aplica listener no form clonado também
+    handleFormSubmit(formClone);
+
+    // Insere no modal
+    modalContent.innerHTML = "";
+    modalContent.appendChild(formClone);
+    modal.style.display = "flex"; // mostra o modal
+  });
+});
+
+// ----- FECHAR MODAL -----
+if (closeBtn) {
+  closeBtn.onclick = function () {
+    modal.style.display = "none";
   };
+}
+
+window.onclick = function (event) {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
 
 
 </script>
