@@ -293,91 +293,122 @@
 
 <script>
 
+
+(function () {
   const modal = document.getElementById("modalForm");
-const modalContent = document.getElementById("modalFormContent");
-const openBtns = document.querySelectorAll(".openModal"); // todos os botões que abrem modal
-const closeBtn = document.querySelector(".close");
-const formOriginal = document.querySelector(".form-container form");
+  const modalContent = document.getElementById("modalFormContent");
+  const openBtns = document.querySelectorAll(".openModal");
+  const closeBtn = document.querySelector(".close");
+  const formOriginal = document.querySelector(".form-container form");
 
-let openedByWhatsApp = false; // flag global
+  let openedByWhatsApp = false;
+  let formInModal = false;
 
-// // ----- FUNÇÃO DE SUBMIT (REUTILIZÁVEL) -----
-// function handleFormSubmit(formEl) {
-//   formEl.addEventListener("submit", function (event) {
-//     event.preventDefault();
-//     event.target.submit(); // envia pro Make normalmente
-
-//     setTimeout(() => {
-//       if (openedByWhatsApp) {
-//         // Redireciona para WhatsApp
-//         window.location.href =
-//           "https://wa.me/5511971678343?text=Ol%C3%A1,%20vim%20do%20an%C3%BAncio%20e%20quero%20conhecer%20a%20Saygo%20Corretora";
-//       } else {
-//         // Redireciona para obrigado.html
-//         window.location.href = "./obrigado.html";
-//       }
-//     }, 200);
-//   });
-// }
-
-// ----- FUNÇÃO DE SUBMIT (REUTILIZÁVEL) -----
-function handleFormSubmit(formEl) {
-  formEl.addEventListener("submit", function (event) {
-    event.preventDefault();
-    event.target.submit(); // envia pro Make normalmente
-
-    // setTimeout(() => {
-    //   // Redireciona sempre para obrigado.html
-    //   window.location.href = "./obrigado.html";
-    // }, 200);
-  });
-}
-
-// Escuta o formulário ORIGINAL (fora do modal)
-handleFormSubmit(formOriginal);
-
-// ----- ABRIR MODAL -----
-openBtns.forEach(btn => {
-  btn.addEventListener("click", (e) => {
-    e.preventDefault(); // impede o <a href="#"> de rolar a página
-
-    // Marca se foi o botão do WhatsApp que abriu
-    openedByWhatsApp = btn.classList.contains("btnwhatsapp");
-
-    // Clona o formulário original
-    const formClone = formOriginal.cloneNode(true);
-
-    // Copia os valores já preenchidos do original para o clone
-    const originalInputs = formOriginal.querySelectorAll("input, select, textarea");
-    const cloneInputs = formClone.querySelectorAll("input, select, textarea");
-
-    originalInputs.forEach((input, index) => {
-      cloneInputs[index].value = input.value;
-    });
-
-    // Aplica listener no form clonado também
-    handleFormSubmit(formClone);
-
-    // Insere no modal
-    modalContent.innerHTML = "";
-    modalContent.appendChild(formClone);
-    modal.style.display = "flex"; // mostra o modal
-  });
-});
-
-// ----- FECHAR MODAL -----
-if (closeBtn) {
-  closeBtn.onclick = function () {
-    modal.style.display = "none";
-  };
-}
-
-window.onclick = function (event) {
-  if (event.target === modal) {
-    modal.style.display = "none";
+  // Garante que exista um iframe oculto para submissão
+  function ensureIframe() {
+    let iframe = document.getElementById("formSubmitIframe");
+    if (!iframe) {
+      iframe = document.createElement("iframe");
+      iframe.id = "formSubmitIframe";
+      iframe.name = "formSubmitIframe";
+      iframe.style.display = "none";
+      document.body.appendChild(iframe);
+    }
+    return iframe;
   }
-};
 
+  // Listener único para o form (mover o form não remove listeners)
+  function handleFormSubmit(formEl) {
+    formEl.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const iframe = ensureIframe();
+
+      // salva target original para restaurar depois
+      const originalTarget = formEl.getAttribute("target");
+
+      // encaminha o POST para o iframe (assim a janela principal não navega)
+      formEl.setAttribute("target", iframe.name);
+
+      // proteções para evitar dupla execução
+      let finished = false;
+      const finish = () => {
+        if (finished) return;
+        finished = true;
+        // restaura target original
+        if (originalTarget === null) formEl.removeAttribute("target");
+        else formEl.setAttribute("target", originalTarget);
+
+        // remove listener e limpa timeout
+        iframe.removeEventListener("load", onload);
+        clearTimeout(timeoutId);
+      };
+
+      // decide o redirecionamento depois que o iframe carregar a resposta
+      const onload = function () {
+        finish();
+        if (formInModal && openedByWhatsApp) {
+          window.location.href = "https://wa.me/5511971678343?text=Ol%C3%A1%2C%20vim%20do%20an%C3%BAncio%20e%20quero%20conhecer%20a%20Saygo%20Corretora";
+        } else {
+          window.location.href = "./obrigado.html";
+        }
+      };
+
+      iframe.addEventListener("load", onload);
+
+      // fallback: se o iframe não carregar em X ms, faz o redirect mesmo assim
+      const timeoutId = setTimeout(() => {
+        finish();
+        if (formInModal && openedByWhatsApp) {
+          window.location.href = "https://wa.me/5511971678343?text=Ol%C3%A1%2C%20vim%20do%20an%C3%BAncio%20e%20quero%20conhecer%20a%20Saygo%20Corretora";
+        } else {
+          window.location.href = "./obrigado.html";
+        }
+      }, 4000); // 4s fallback (ajuste se quiser)
+
+      // faz o submit "normal" — agora o navegador fará o POST no iframe
+      formEl.submit();
+    });
+  }
+
+  handleFormSubmit(formOriginal);
+
+  // Ao clicar nos botões que abrem o modal, apenas movemos o mesmo form original
+  openBtns.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      openedByWhatsApp = btn.classList.contains("btnwhatsapp");
+
+      // move o form para dentro do modal (sem clonar)
+      modalContent.innerHTML = "";
+      modalContent.appendChild(formOriginal);
+
+      formInModal = true;
+      modal.style.display = "flex";
+    });
+  });
+
+  // Função para devolver o form à seção original
+  function returnFormToOriginalPlace() {
+    const container = document.querySelector(".form-container");
+    if (container) container.appendChild(formOriginal);
+    formInModal = false;
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", function () {
+      modal.style.display = "none";
+      returnFormToOriginalPlace();
+    });
+  }
+
+  window.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+      returnFormToOriginalPlace();
+    }
+  });
+})();
 
 </script>
 
