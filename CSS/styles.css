@@ -339,7 +339,7 @@ header {
   font-weight: 500;
 }
 
-.form-group input {
+.form-group input, select {
   width: 100%;
   padding: 10px 14px;
   border-radius: 20px;

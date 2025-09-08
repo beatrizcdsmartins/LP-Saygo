@@ -8,8 +8,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <link rel="shortcut icon" href="./assets/image 2.ico" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="shortcut icon" href="./assets/image 2.ico" type="image/x-icon">
 
   <link rel="stylesheet" href="./CSS/styles.css">
   <title>Câmbio - Saygo</title>
@@ -19,165 +19,194 @@
 <body>
   <div class="wrapper">
 
-<div id="modalForm" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <div id="modalFormContent"></div>
+    <div id="modalForm" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modalFormContent"></div>
+      </div>
+    </div>
+    <header>
+      <a href="#section1"><img src="./assets/logoSaygo.webp" alt="logo Saygo"></a>
+      <a href="#form" class="ctaBtn">Vamos conversar?</a>
+    </header>
+
+    <section class="section1" id="section1">
+      <div>
+        <h1 data-aos="fade-right" data-aos-delay="100">Feche câmbio com <br> taxa a partir de 0,2% <br>e sem burocracia
+        </h1>
+        <p data-aos="fade-right" data-aos-delay="200">Na Saygo, você economiza no fechamento cambial <br>
+          com <span>taxas competitivas</span> , sem tarifas ocultas e com <br>
+          suporte especializado. </p>
+
+        <a data-aos="fade-right" data-aos-delay="250" href="#form" class="ctaBtn openModal">Quero simular minha taxa
+          agora!</a>
+      </div>
+
+    </section>
+
+
+    <section class="section2">
+
+      <div class="containerBoxes">
+        <h2>
+          Nosso impacto: expertise, solução <br>
+          e resultado!
+        </h2>
+
+        <div class="wrappboxes">
+          <div class="internBoxSection2">
+            <img src="./assets/image 2.svg" alt="logo">
+            <p>Com mais de 20 anos de <br>atuação, já atendemos<br> +2.000 empresas com<br> soluções eficazes.</p>
+          </div>
+
+          <div class="internBoxSection2">
+            <img src="./assets/Banco-central-do-brasil-logo 1.svg" alt="logo Banco Central">
+            <p> Somos autorizados pelo <br>Banco Central, temos 95%<br> de satisfação dos nossos<br> clientes.</p>
+          </div>
+        </div>
+      </div>
+
+      <article>
+        <h2>
+          Autoridade e <br>conformidade!
+        </h2>
+        <p>+200 empresas já operaram câmbio conosco <br>
+          +USD 500 milhões em operações realizadas<br>
+          Agilidade desde o cadastro até o fechamento<br>
+          Membro certificado pela ABRACAM</p>
+
+        <a href="#form" class="ctaBtn">Falar com um especialista</a>
+      </article>
+    </section>
+
+    <section class="section3">
+      <article class="article1">
+
+        <h3>Principais benefícios:</h3>
+
+        <ul>
+          <li data-aos="fade-up" data-aos-delay="100">Taxas competitivas a partir de 0,2%</li>
+          <li data-aos="fade-up" data-aos-delay="200">Fechamento rápido, com suporte humano e IA</li>
+          <li data-aos="fade-up" data-aos-delay="300">Sem tarifa de corretagem ou custos ocultos</li>
+          <li data-aos="fade-up" data-aos-delay="400">Pagamento em Yuan disponível para <br>fornecedores chineses</li>
+        </ul>
+
+
+        <a href="#form" class="ctaBtn">Começar a economizar!</a>
+      </article>
+
+      <article class="article2">
+        <h3>Dúvidas frequentes:</h3>
+
+        <div>
+          <h4>É seguro?</h4>
+          <p>Além de ser autorizada pelo Banco Central, a Saygo possui o Selo <br>ABRACAM, que atesta as melhores
+            práticas de
+            câmbio no Brasil.  </p>
+        </div>
+
+        <div>
+          <h4>É complicado migrar do banco?</h4>
+          <p>Não, nosso assessor acompanha todo o processo</p>
+        </div>
+
+        <div>
+          <h4>Serve para minha empresa?</h4>
+          <p>Sim, ideal para operações a partir de USD 10 mil/mês.</p>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="section4">
+
+      <h2>Descubra quanto sua empresa pode economizar no câmbio</h2>
+      <div id="form" class="form-container">
+        <h2>Preencha em poucos cliques!</h2>
+        <form action="https://hook.us1.make.com/mvs1iqc999dclyx3xsp3hesw3hbgtpj7" method="POST">
+          <div class="form-group">
+            <label for="nome">Nome *</label>
+            <input type="text" id="nome" name="nome" required>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="telefone">Telefone *</label>
+            <input type="tel" id="telefone" name="telefone" required>
+          </div>
+          <!-- 1. Volume médio mensal -->
+          <div class="form-group">
+            <label for="volume">Volume médio mensal de operações de câmbio *</label>
+            <select id="volume" name="volume" required>
+              <option value="" disabled selected>Selecione uma opção</option>
+              <option value="ate-10000">Até USD 10 mil</option>
+              <option value="10000-50000">De USD 10 mil a 50 mil</option>
+              <option value="acima-50000">Acima de 50 mil</option>
+            </select>
+          </div>
+
+          <!-- 2. Como sua empresa fecha câmbio hoje -->
+          <div class="form-group">
+            <label for="fechamento">Como sua empresa fecha câmbio hoje? *</label>
+            <select id="fechamento" name="fechamento" required>
+              <option value="" disabled selected>Selecione uma opção</option>
+              <option value="banco">Banco tradicional</option>
+              <option value="corretora">Outra corretora</option>
+              <option value="nunca">Nunca fechou câmbio</option>
+            </select>
+          </div>
+
+          <!-- 3. Frequência de operações -->
+          <div class="form-group">
+            <label for="frequencia">Com que frequência sua empresa realiza operações de câmbio? *</label>
+            <select id="frequencia" name="frequencia" required>
+              <option value="" disabled selected>Selecione uma opção</option>
+              <option value="eventual">Eventual (menos de 1 vez/mês)</option>
+              <option value="mensal">Mensal</option>
+              <option value="semanal">Semanal</option>
+              <option value="mais-semanal">Mais de 1 vez por semana</option>
+            </select>
+          </div>
+        
+
+          <!-- Campos ocultos para UTMs e tracking -->
+          <input type="hidden" id="utm_source" name="utm_source">
+          <input type="hidden" id="utm_medium" name="utm_medium">
+          <input type="hidden" id="utm_content" name="utm_content">
+          <input type="hidden" id="utm_campaign" name="utm_campaign">
+          <input type="hidden" id="utm_term" name="utm_term">
+          <input type="hidden" id="pagina_captura" name="pagina_captura">
+          <input type="hidden" id="gclid" name="gclid">
+          <input type="hidden" id="client_id" name="client_id">
+
+          <button type="submit" class="form-button">Quero minha simulação agora</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section5">
+      <h3 data-aos="fade" data-aos-delay="100">Seus dados estão seguros!</h3>
+      <p>A Saygo é instituição financeira autorizada pelo Banco Central e possui Selo <span>ABRACAM</span>. </p>
+    </section>
+
+    <footer>
+      <p>© 2025 - Todos os direitos reservados - Saygo Group</p>
+    </footer>
+
+    <a href="#"><img src="./assets/Btn Whatsapp.svg" alt="whatsapp" class="btnwhatsapp openModal"></a>
+
   </div>
-</div>
-  <header>
-    <a href="#section1"><img src="./assets/logoSaygo.webp" alt="logo Saygo"></a>
-    <a href="#form" class="ctaBtn">Vamos conversar?</a>
-  </header>
 
-  <section class="section1" id="section1">
-    <div>
-   <h1 data-aos="fade-right" data-aos-delay="100">Feche câmbio com <br> taxa a partir de 0,2% <br>e sem burocracia</h1>
-    <p data-aos="fade-right" data-aos-delay="200">Na Saygo, você economiza no fechamento cambial <br>
-      com <span>taxas competitivas</span> , sem tarifas ocultas e com <br>
-      suporte especializado. </p>
-
-    <a data-aos="fade-right" data-aos-delay="250" href="#form" class="ctaBtn openModal">Quero simular minha taxa agora!</a>
-    </div>
- 
-  </section>
-
-
-  <section class="section2">
-
-    <div class="containerBoxes">
-      <h2>
-        Nosso impacto: expertise, solução <br>
-        e resultado!
-      </h2>
-
-      <div class="wrappboxes">
-        <div class="internBoxSection2">
-          <img src="./assets/image 2.svg" alt="logo">
-          <p>Com mais de 20 anos de <br>atuação, já atendemos<br> +2.000 empresas com<br> soluções eficazes.</p>
-        </div>
-
-        <div class="internBoxSection2">
-          <img src="./assets/Banco-central-do-brasil-logo 1.svg" alt="logo Banco Central">
-          <p> Somos autorizados pelo <br>Banco Central, temos 95%<br> de satisfação dos nossos<br> clientes.</p>
-        </div>
-      </div>
-    </div>
-
-    <article>
-      <h2>
-        Autoridade e <br>conformidade!
-      </h2>
-      <p>+200 empresas já operaram câmbio conosco <br>
-        +USD 500 milhões em operações realizadas<br>
-        Agilidade desde o cadastro até o fechamento<br>
-        Membro certificado pela ABRACAM</p>
-
-      <a href="#form" class="ctaBtn">Falar com um especialista</a>
-    </article>
-  </section>
-
-  <section class="section3">
-    <article class="article1">
-
-      <h3>Principais benefícios:</h3>
-     
-       <ul>
-  <li data-aos="fade-up" data-aos-delay="100">Taxas competitivas a partir de 0,2%</li>
-  <li data-aos="fade-up" data-aos-delay="200">Fechamento rápido, com suporte humano e IA</li>
-  <li data-aos="fade-up" data-aos-delay="300">Sem tarifa de corretagem ou custos ocultos</li>
-  <li data-aos="fade-up" data-aos-delay="400">Pagamento em Yuan disponível para <br>fornecedores chineses</li>
-</ul>
-       
-   
-      <a href="#form" class="ctaBtn">Começar a economizar!</a>
-    </article>
-
-    <article class="article2">
-      <h3>Dúvidas frequentes:</h3>
-
-      <div>
-        <h4>É seguro?</h4>
-        <p>Além de ser autorizada pelo Banco Central, a Saygo possui o Selo <br>ABRACAM, que atesta as melhores práticas de
-          câmbio no Brasil.  </p>
-      </div>
-
-      <div>
-        <h4>É complicado migrar do banco?</h4>
-        <p>Não, nosso assessor acompanha todo o processo</p>
-      </div>
-
-      <div>
-        <h4>Serve para minha empresa?</h4>
-        <p>Sim, ideal para operações a partir de USD 10 mil/mês.</p>
-      </div>
-    </article>
-
-  </section>
-
-  <section class="section4">
-
-    <h2>Descubra quanto sua empresa pode economizar no câmbio</h2>
-    <div id="form" class="form-container">
-      <h2>Preencha em poucos cliques!</h2>
-      <form action="https://hook.us1.make.com/mvs1iqc999dclyx3xsp3hesw3hbgtpj7" method="POST">
-        <div class="form-group">
-          <label for="nome">Nome *</label>
-          <input type="text" id="nome" name="nome" required>
-        </div>
-        <div class="form-group">
-          <label for="email">E-mail *</label>
-          <input type="email" id="email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label for="telefone">Telefone *</label>
-          <input type="tel" id="telefone" name="telefone" required>
-        </div>
-        <div class="form-group">
-          <label for="volume">Volume médio de operação cambial *</label>
-          <input type="text" id="volume" name="volume" required>
-        </div>
-        <div class="form-group">
-          <label for="cambio">Já fecha câmbio hoje com *</label>
-          <input type="text" id="cambio" name="cambio" required>
-        </div>
-
-        <!-- Campos ocultos para UTMs e tracking -->
-        <input type="hidden" id="utm_source" name="utm_source">
-        <input type="hidden" id="utm_medium" name="utm_medium">
-        <input type="hidden" id="utm_content" name="utm_content">
-        <input type="hidden" id="utm_campaign" name="utm_campaign">
-        <input type="hidden" id="utm_term" name="utm_term">
-        <input type="hidden" id="pagina_captura" name="pagina_captura">
-        <input type="hidden" id="gclid" name="gclid">
-        <input type="hidden" id="client_id" name="client_id">
-
-        <button type="submit" class="form-button">Quero minha simulação agora</button>
-      </form>
-    </div>
-  </section>
-
-  <section class="section5">
-    <h3 data-aos="fade" data-aos-delay="100">Seus dados estão seguros!</h3>
-    <p>A Saygo é instituição financeira autorizada pelo Banco Central e possui Selo <span>ABRACAM</span>. </p>
-  </section>
-
-  <footer>
-    <p>© 2025 - Todos os direitos reservados - Saygo Group</p>
-  </footer>
-
-  <a href="#"><img src="./assets/Btn Whatsapp.svg" alt="whatsapp" class="btnwhatsapp openModal"></a>
-    
-  </div>
-
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({
-    duration: 1000, // duração da animação em ms
-    easing: 'ease-in-out', // suavidade
-    once: true, // anima uma vez só
-  });
-</script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000, // duração da animação em ms
+      easing: 'ease-in-out', // suavidade
+      once: true, // anima uma vez só
+    });
+  </script>
 
   <script>
     function getURLParameterValue(paramName) {
@@ -264,20 +293,20 @@
 <script>
   const form = document.querySelector("form");
 
-document.addEventListener("submit", function (event) {
-  if (event.target.tagName.toLowerCase() === "form") {
-    setTimeout(() => {
-      window.location.href = "./obrigado.html";
-    }, 200);
-  }
-});
+  document.addEventListener("submit", function (event) {
+    if (event.target.tagName.toLowerCase() === "form") {
+      setTimeout(() => {
+        window.location.href = "./obrigado.html";
+      }, 200);
+    }
+  });
 
 
 
 
   //modal
 
- const modal = document.getElementById("modalForm");
+  const modal = document.getElementById("modalForm");
   const modalContent = document.getElementById("modalFormContent");
   const openBtns = document.querySelectorAll(".openModal"); // todos os botões que abrem modal
   const closeBtn = document.querySelector(".close");
@@ -288,19 +317,19 @@ document.addEventListener("submit", function (event) {
       e.preventDefault();
       // Clona o formulário original
       const formClone = formOriginal.cloneNode(true);
-      modalContent.innerHTML = ""; 
+      modalContent.innerHTML = "";
       modalContent.appendChild(formClone);
       modal.style.display = "flex"; // mostra o modal
     });
   });
 
   // Fechar no X
-  closeBtn.onclick = function() {
+  closeBtn.onclick = function () {
     modal.style.display = "none";
   }
 
   // Fechar clicando fora do modal
-  window.onclick = function(event) {
+  window.onclick = function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
     }

@@ -388,7 +388,7 @@ header {
     font-weight: 500;
 }
 
-.form-group input {
+.form-group input, select {
     width: 100%;
     padding: 10px 14px;
     border-radius: 20px;
@@ -396,6 +396,8 @@ header {
     outline: none;
     font-size: 14px;
 }
+
+
 
 form {
     display: flex;
