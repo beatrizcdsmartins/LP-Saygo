@@ -70,10 +70,11 @@
         <h2>
           Autoridade e <br>conformidade!
         </h2>
-        <p>+200 empresas já operaram câmbio conosco <br>
-          +USD 500 milhões em operações realizadas<br>
-          Agilidade desde o cadastro até o fechamento<br>
-          Membro certificado pela ABRACAM</p>
+        <p> +1.500 empresas atendidas <br>
+          +USD 500.000 milhões em operações realizadas<br>
+          Top 20 corretoras que mais crescem no Brasil<br>
+          Autorizada pelo Bacen<br>
+          Certificada ABRACAM</p>
 
         <a href="#form" class="ctaBtn">Falar com um especialista</a>
       </article>
@@ -169,7 +170,7 @@
               <option value="mais-semanal">Mais de 1 vez por semana</option>
             </select>
           </div>
-        
+
 
           <!-- Campos ocultos para UTMs e tracking -->
           <input type="hidden" id="utm_source" name="utm_source">
@@ -291,20 +292,6 @@
 </body>
 
 <script>
-  const form = document.querySelector("form");
-
-  document.addEventListener("submit", function (event) {
-    if (event.target.tagName.toLowerCase() === "form") {
-      setTimeout(() => {
-        window.location.href = "./obrigado.html";
-      }, 200);
-    }
-  });
-
-
-
-
-  //modal
 
   const modal = document.getElementById("modalForm");
   const modalContent = document.getElementById("modalFormContent");
@@ -312,28 +299,65 @@
   const closeBtn = document.querySelector(".close");
   const formOriginal = document.querySelector(".form-container form");
 
+  let openedByWhatsApp = false; // flag global
+
+  // ----- FUNÇÃO DE SUBMIT (REUTILIZÁVEL) -----
+  function handleFormSubmit(formEl) {
+    formEl.addEventListener("submit", function (event) {
+      event.preventDefault();
+      event.target.submit(); // envia pro Make normalmente
+
+      setTimeout(() => {
+        if (openedByWhatsApp) {
+          // Redireciona para WhatsApp
+          window.location.href =
+            "https://wa.me/5511971678343?text=Ol%C3%A1,%20vim%20do%20an%C3%BAncio%20e%20quero%20conhecer%20a%20Saygo%20Corretora";
+        } else {
+          // Redireciona para obrigado.html
+          window.location.href = "./obrigado.html";
+        }
+      }, 200);
+    });
+  }
+
+  // Escuta o formulário ORIGINAL (fora do modal)
+  handleFormSubmit(formOriginal);
+
+  // ----- ABRIR MODAL -----
   openBtns.forEach(btn => {
     btn.addEventListener("click", (e) => {
-      e.preventDefault();
+      e.preventDefault(); // impede o <a href="#"> de rolar a página
+
+      // Marca se foi o botão do WhatsApp que abriu
+      openedByWhatsApp = btn.classList.contains("btnwhatsapp");
+
       // Clona o formulário original
       const formClone = formOriginal.cloneNode(true);
+
+      // Aplica listener no form clonado também
+      handleFormSubmit(formClone);
+
+      // Insere no modal
       modalContent.innerHTML = "";
       modalContent.appendChild(formClone);
       modal.style.display = "flex"; // mostra o modal
     });
   });
 
-  // Fechar no X
-  closeBtn.onclick = function () {
-    modal.style.display = "none";
+  // ----- FECHAR MODAL -----
+  if (closeBtn) {
+    closeBtn.onclick = function () {
+      modal.style.display = "none";
+    };
   }
 
-  // Fechar clicando fora do modal
   window.onclick = function (event) {
     if (event.target === modal) {
       modal.style.display = "none";
     }
-  }
+  };
+
+
 </script>
 
 
